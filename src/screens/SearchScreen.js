@@ -18,7 +18,7 @@ const SearchScreen = () => {
     const [errorMessage, setErrorMessage]= useState('');//initial- empty
 
 //helper function to initiate the request:
-    const searchApi = async ()=> {
+    const searchApi = async (searchTerm)=> {
         //to handle search results - add async func and await - await cn't be used without async!
 /*
 to simplify our code a little bit we can turn search API into an async function by
@@ -38,7 +38,7 @@ so we use .businesses - because that's all we need
                 //second arg - params -for search results 
                 params: {
                     limit: 50,//how many results will show
-                    term, //term: term,
+                    term: searchTerm, //will run api request with this argument
                     location: 'san jose'
                 }
     
@@ -53,6 +53,10 @@ so we use .businesses - because that's all we need
        
     };
 
+ // when we want to do some initial state change inside of our component we're
+//never going to just call a function directly inside of our component- it may result in infinite loop:
+//call search API when component is first rendered  --BAD CODE --
+   // searchApi('pasta'); //starts not empty, but with results initially
 
     //callback functions to the child - when there are changes in the state:
    //-to reach search bar from the parent component
@@ -60,7 +64,8 @@ so we use .businesses - because that's all we need
      <View>
         <SearchBar term={term} 
         onTermChange= {setTerm} //= {newTerm => setTerm(newTerm)} 
-        onTermSubmit= {searchApi} //={() => searchApi()}
+        onTermSubmit={() => searchApi(term)} // passing term- current piece of state
+        //= {searchApi}
         //passing a reference to the function that should be invoked (omitting parentheses etc)
         />
     
