@@ -13,6 +13,10 @@ const SearchScreen = () => {
 //initialize with empty array - because expecting many objects-big array
 //: amount of objects and their properties
 
+// if we want detect when an error occurs and update what is visible or show the error message to the user -
+//it means we need to add in a new state variable:
+    const [errorMessage, setErrorMessage]= useState('');//initial- empty
+
 //helper function to initiate the request:
     const searchApi = async ()=> {
         //to handle search results - add async func and await - await cn't be used without async!
@@ -26,19 +30,27 @@ adding in that async keyword right there we can then use the await syntax inside
 response.data is going to be this whole big object (all business properties)-that we see inside the Yelp documentation-
 so we use .businesses - because that's all we need
 */
-        const response = await yelp.get('/search', {
-            //first arg - the route
-            //second arg - params -for search results 
-            params: {
-                limit: 50,//how many results will show
-                term, //term: term,
-                location: 'san jose'
-            }
 
-        }); // access the route (from yelp.js)
+//error handling:
+        try{
+            const response = await yelp.get('/search', {
+                //first arg - the route
+                //second arg - params -for search results 
+                params: {
+                    limit: 50,//how many results will show
+                    term, //term: term,
+                    location: 'san jose'
+                }
+    
+            }); // access the route (from yelp.js)
+           
+    //anytime we want to update some piece of state -which is where we're going to store the search results we'll use the setter:       
+            setResults (response.data.businesses);
+
+        } catch (err){
+            setErrorMessage('Something went wrong..')
+        }
        
-//anytime we want to update some piece of state -which is where we're going to store the search results we'll use the setter:       
-        setResults (response.data.businesses);
     };
 
 
@@ -51,7 +63,10 @@ so we use .businesses - because that's all we need
         onTermSubmit= {searchApi} //={() => searchApi()}
         //passing a reference to the function that should be invoked (omitting parentheses etc)
         />
-        <Text>Search Screen</Text>
+    
+    {errorMessage ? <Text>{errorMessage}</Text> : null
+    //if-else - iterinary expression- if true-show <Text>, else- null
+    }
     <Text>We have found {results.length} results</Text>
 
 
