@@ -9,7 +9,8 @@ const ResultsDetail = ({result})=> {
 //{{}}- mean: the outer{} means we're about to refer to a javascript expression 
 //and the inner one{} is forming the actual object that we want to pass.
 //uri: prop - string for the address/path of the image
-        <View>
+//adding container style - to VIEW:
+        <View style={styles.container}>
             <Image style={styles.image} source={{ uri:result.image_url }} />
             <Text style={styles.name}>{result.name}</Text>
             <Text>{result.rating} Stars, {result.review_count} Reviwes </Text>
@@ -22,11 +23,16 @@ const ResultsDetail = ({result})=> {
 // so we need to add in an additional style to our style sheet and apply it to that image element:a new section called 'image':
 
 const styles = StyleSheet.create({
+    container: {
+        marginLeft: 15
+    },
+
     image: {
         width: 250,
         height: 120,
 //border radius can be used to round off the corners of an element:
-        borderRadius:4
+        borderRadius:4,
+        marginBottom: 5
     },
     name: {
         fontWeight: 'bold',

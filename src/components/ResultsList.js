@@ -17,11 +17,13 @@ const ResultsList = ({title, results})=> {
 // I want this list to render itself horizontally; 
 //by default a flat list renders itself vertically or top to bottom.
 //So to show our list of items from left to right we add in a prop-horizontal:
-    return <View>
+    return (
+     <View style={styles.container}>
         <Text style = {styles.title}>{title}</Text>
         <FlatList
             
             horizontal={true}
+            
             data={results}
             keyExtractor={(result)=> result.id}
             renderItem= {({item}) =>{
@@ -34,16 +36,20 @@ const ResultsList = ({title, results})=> {
         />
         
     </View>
+    );
 };
 
 const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: 'bold',
-        left: 10
+        left: 15, // === marginLeft: 10
+        marginBottom: 5
+        },
+        container: {
+            marginBottom: 10
+        }
         
-    }
-
-});
+ });
 
 export default ResultsList;

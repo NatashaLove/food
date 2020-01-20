@@ -32,7 +32,7 @@ return results.filter(results => {
     //callback functions to the child - when there are changes in the state:
    //-to reach search bar from the parent component
     return (
-     <View>
+     <View >
         <SearchBar term={term} 
         onTermChange= {setTerm} //= {newTerm => setTerm(newTerm)} 
         onTermSubmit={() => searchApi(term)} // passing term- current piece of state
@@ -43,7 +43,7 @@ return results.filter(results => {
     {errorMessage ? <Text>{errorMessage}</Text> : null
     //if-else - iterinary expression- if true-show <Text>, else- null
     }
-    <Text>We have found {results.length} results</Text>
+    <Text style={styles.textStyle}>We have found {results.length} results</Text>
     <ResultsList results={filterResultsByPrice('$')} title="Cost Effective" />
     <ResultsList results={filterResultsByPrice('$$')}title="Bit Pricier"/>
     <ResultsList results={filterResultsByPrice('$$$')}title= "Big Spender"/>
@@ -52,6 +52,11 @@ return results.filter(results => {
     );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    textStyle: {
+        marginLeft: 15 // gives 10 px between images and sides
+        
+    }
+});
 
 export default SearchScreen;
