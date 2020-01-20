@@ -35,7 +35,9 @@ const styles = StyleSheet.create({
         height:50,
         borderRadius: 5,// rounded corners
         marginHorizontal: 15,
-        flexDirection: 'row' // makes the icon and the text show on the same line   
+        flexDirection: 'row', // makes the icon and the text show on the same line   
+        marginBottom: 10
+    
     },
     inputStyle: {
         //borderColor: 'black',

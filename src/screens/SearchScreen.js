@@ -38,7 +38,9 @@ return results.filter(results => {
 //Flex property can be added to a single child that we're displaying and
 // it tells that element to just expand and fill up all the visible available space.
 //need flex: 1 - every time to have elements within borders!
-    <View style={{flex: 1}}>
+    //<View style={{flex: 1}}>- instead just empty <> and </>: (it just groups all elements into screen)
+    // <View> just makes it more difficult
+    <>
         <SearchBar term={term} 
         onTermChange= {setTerm} //= {newTerm => setTerm(newTerm)} 
         onTermSubmit={() => searchApi(term)} // passing term- current piece of state
@@ -49,21 +51,23 @@ return results.filter(results => {
     {errorMessage ? <Text>{errorMessage}</Text> : null
     //if-else - iterinary expression- if true-show <Text>, else- null
     }
-    <Text style={styles.textStyle}>We have found {results.length} results</Text>
+    
     <ScrollView>
     <ResultsList results={filterResultsByPrice('$')} title="Cost Effective" />
     <ResultsList results={filterResultsByPrice('$$')}title="Bit Pricier"/>
     <ResultsList results={filterResultsByPrice('$$$')}title= "Big Spender"/>
     </ScrollView>
-    </View>
+    </>
     ); // ScrollView - wrap around elements to be scrolled
 };
-
+/*
 const styles = StyleSheet.create({
     textStyle: {
         marginLeft: 15 // gives 10 px between images and sides
+(was before results: <Text style={styles.textStyle}>We have found {results.length} results</Text>)
         
     }
 });
+*/
 
 export default SearchScreen;
