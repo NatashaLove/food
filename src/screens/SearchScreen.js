@@ -10,7 +10,8 @@ import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
 
 
-const SearchScreen = () => {
+const SearchScreen = (props) => {
+    console.log(props);
 
     //term - what we are going to look for:
     const [term, setTerm] = useState(''); //empty string by default
