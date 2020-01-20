@@ -17,7 +17,7 @@ const SearchScreen = () => {
   
 const [searchApi, results, errorMessage]= useResults();
 
-//console.log(results);
+//console.log(results); - can see what props the item/result has
 const filterResultsByPrice = (price) => {
 // price === '$'||'$$'|| '$$$' - to filter results:
 return results.filter(results => {
