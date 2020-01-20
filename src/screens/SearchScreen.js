@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';// hooks- functions to add functionality to a function component
 // useEffect- a hook or essentially a function that allows us to run some snippet of code just one time when our component is first rendered to the screen
 
-import { View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet, ScrollView} from 'react-native';
+//ScrollView enables scrolling vertically if detects too many elements-wrap around what needs to be scrolled thru
+
 import SearchBar from '../components/SearchBar';
 //import yelp from '../api/yelp'; // this line was trnsferred to useREsults.js
 import useResults from '../hooks/useResults';
@@ -29,10 +31,14 @@ return results.filter(results => {
 
 //CODE from here was cut and pasted in file (hooks)-useResults//
 
-    //callback functions to the child - when there are changes in the state:
-   //-to reach search bar from the parent component
+//callback functions to the child - when there are changes in the state:
+//-to reach search bar from the parent component
+
     return (
-     <View >
+//Flex property can be added to a single child that we're displaying and
+// it tells that element to just expand and fill up all the visible available space.
+//need flex: 1 - every time to have elements within borders!
+    <View style={{flex: 1}}>
         <SearchBar term={term} 
         onTermChange= {setTerm} //= {newTerm => setTerm(newTerm)} 
         onTermSubmit={() => searchApi(term)} // passing term- current piece of state
@@ -44,12 +50,13 @@ return results.filter(results => {
     //if-else - iterinary expression- if true-show <Text>, else- null
     }
     <Text style={styles.textStyle}>We have found {results.length} results</Text>
+    <ScrollView>
     <ResultsList results={filterResultsByPrice('$')} title="Cost Effective" />
     <ResultsList results={filterResultsByPrice('$$')}title="Bit Pricier"/>
     <ResultsList results={filterResultsByPrice('$$$')}title= "Big Spender"/>
-
+    </ScrollView>
     </View>
-    );
+    ); // ScrollView - wrap around elements to be scrolled
 };
 
 const styles = StyleSheet.create({
