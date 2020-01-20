@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';// hooks- functions to add functionality to a function component
-// useEffect- a hook or essentially a function that allows us to run some snippet of code just one time when our componentis first rendered to the screen
+// useEffect- a hook or essentially a function that allows us to run some snippet of code just one time when our component is first rendered to the screen
 
 import { View, Text, StyleSheet} from 'react-native';
 import SearchBar from '../components/SearchBar';
 //import yelp from '../api/yelp'; // this line was trnsferred to useREsults.js
 import useResults from '../hooks/useResults';
+import ResultsList from '../components/ResultsList';
+
 
 const SearchScreen = () => {
 
@@ -14,6 +16,16 @@ const SearchScreen = () => {
 //We're always going to make useState.
   
 const [searchApi, results, errorMessage]= useResults();
+
+//console.log(results);
+const filterResultsByPrice = (price) => {
+// price === '$'||'$$'|| '$$$' - to filter results:
+return results.filter(results => {
+    return results.price === price;
+})
+
+};
+
 
 //CODE from here was cut and pasted in file (hooks)-useResults//
 
@@ -32,7 +44,9 @@ const [searchApi, results, errorMessage]= useResults();
     //if-else - iterinary expression- if true-show <Text>, else- null
     }
     <Text>We have found {results.length} results</Text>
-
+    <ResultsList results={filterResultsByPrice('$')} title="Cost Effective" />
+    <ResultsList results={filterResultsByPrice('$$')}title="Bit Pricier"/>
+    <ResultsList results={filterResultsByPrice('$$$')}title= "Big Spender"/>
 
     </View>
     );
