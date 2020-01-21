@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet, FlatList } from 'react-native';
+import {View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 //flatlist element from React Native.We use it anytime we want to show a scroll list of data to our user.
 import ResultsDetail from './ResultsDetail';
 
 //creating the component with view and style- 
 //in search screen create 3 instances of it
-const ResultsList = ({title, results})=> {
+const ResultsList = ({title, results, navigation})=> {
 // (props), but in particular - ({})- like ({title}), results - what props is in the instances in searchscreen    
 
 //{title} below in {}- because it's javascript var inside jsx- the var  will take its own arg in each instance
@@ -29,7 +29,16 @@ const ResultsList = ({title, results})=> {
             renderItem= {({item}) =>{
                 //item === result object
                 //on the screen:
-                return <ResultsDetail result={item} />;
+                return (
+//to wrap with a touchable opacity- and then on touchable opacity we can add in our onPress callback.
+//So going to pass to it Arrow function- anytime a user taps on anything enclosed by this touchable opacity 
+//we're gonna call navigation.navigate (function of navigation obj) -and pass in a string telling react or the stack navigator what screen to navigate to.
+
+                    <TouchableOpacity onPress={()=> navigation.navigate('ResultsShow')} // ResultsShow - name of screen in the app.js
+                    >
+                    <ResultsDetail result={item} />
+                    </TouchableOpacity>
+                );
                 //passing the component to return results (adding additional props)
             }}
 

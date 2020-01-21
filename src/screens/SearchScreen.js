@@ -9,9 +9,10 @@ import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
 
-
-const SearchScreen = (props) => {
-    console.log(props);
+//property we care about is the navigation so we take the entire navigation object 
+//and pass it down to some child component (to RresultsLists below - to all three instances).
+const SearchScreen = ({navigation}) => {
+  //  console.log(props); - can see all props
 
     //term - what we are going to look for:
     const [term, setTerm] = useState(''); //empty string by default
@@ -54,9 +55,21 @@ return results.filter(results => {
     }
     
     <ScrollView>
-    <ResultsList results={filterResultsByPrice('$')} title="Cost Effective" />
-    <ResultsList results={filterResultsByPrice('$$')}title="Bit Pricier"/>
-    <ResultsList results={filterResultsByPrice('$$$')}title= "Big Spender"/>
+    <ResultsList 
+    results={filterResultsByPrice('$')} 
+    title="Cost Effective" 
+    navigation={navigation}
+    />
+    <ResultsList 
+    results={filterResultsByPrice('$$')}
+    title="Bit Pricier"
+    navigation={navigation}
+    />
+    <ResultsList 
+    results={filterResultsByPrice('$$$')}
+    title= "Big Spender"
+    navigation={navigation}
+    />
     </ScrollView>
     </>
     ); // ScrollView - wrap around elements to be scrolled

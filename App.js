@@ -11,7 +11,7 @@ import ResultsDetail from './src/components/ResultsDetail';
 const navigator = createStackNavigator ({
 
 Search: SearchScreen,
-ResultShow: ResultsShowScreen
+ResultsShow: ResultsShowScreen
 }, 
 // second objects has 2 options:
 {
