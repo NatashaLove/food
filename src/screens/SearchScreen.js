@@ -11,7 +11,8 @@ import ResultsList from '../components/ResultsList';
 
 //property we care about is the navigation so we take the entire navigation object 
 //and pass it down to some child component (to RresultsLists below - to all three instances).
-const SearchScreen = ({navigation}) => {
+const SearchScreen = () => {
+    //deleted {navigation} prop from args- because SearchScreen doesn't need it (skipping it)
   //  console.log(props); - can see all props
 
     //term - what we are going to look for:
@@ -58,17 +59,17 @@ return results.filter(results => {
     <ResultsList 
     results={filterResultsByPrice('$')} 
     title="Cost Effective" 
-    navigation={navigation}
+   // navigation={navigation}
     />
     <ResultsList 
     results={filterResultsByPrice('$$')}
     title="Bit Pricier"
-    navigation={navigation}
+   // navigation={navigation}
     />
     <ResultsList 
     results={filterResultsByPrice('$$$')}
     title= "Big Spender"
-    navigation={navigation}
+   // navigation={navigation}
     />
     </ScrollView>
     </>

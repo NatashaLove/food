@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 //flatlist element from React Native.We use it anytime we want to show a scroll list of data to our user.
 import ResultsDetail from './ResultsDetail';
+import {withNavigation} from 'react-navigation';
 
 //creating the component with view and style- 
 //in search screen create 3 instances of it
@@ -61,4 +62,7 @@ const styles = StyleSheet.create({
         
  });
 
-export default ResultsList;
+export default withNavigation (ResultsList);
+//we're no longer exporting results less directly. not just return: ResultsList - now it's wrapped
+//Instead we are exporting a special version of resultsList with extra functionality 
+//That'll give resultsList access to navigation.
