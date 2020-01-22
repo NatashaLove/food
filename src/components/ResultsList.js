@@ -14,6 +14,10 @@ const ResultsList = ({title, results, navigation})=> {
 
 
 //results.length - how many results
+//check if no results = don't show the section with title alone:
+    if (!results.length) {
+        return null;
+    }
 
 // I want this list to render itself horizontally; 
 //by default a flat list renders itself vertically or top to bottom.

@@ -2,7 +2,7 @@
 //so that a user can navigate to it anytime they tap on one of these different restaurants.
 import React, { useState, useEffect } from 'react';
 //So we need to create a new State variable inside of this component that's going to hold onto this response which we get back from the Yelp API
-import {View, Text, StyleSheet, FlatList, Image} from 'react-native';// Image class - to show images
+import {View, Text, StyleSheet, FlatList, Image, ScrollView} from 'react-native';// Image class - to show images
 //FlatList - to display the result: list of elements (pics)
 import ResultsDetail from '../components/ResultsDetail';
 import yelp from '../api/yelp';
@@ -48,8 +48,9 @@ if (!result){
 }
 
 return (
-<View>
+<>
     <Text>{result.name}</Text> 
+    <ScrollView>
     <FlatList
     data={result.photos}// arr of strings
     keyExtractor={(photo) => photo}// photo - is a string (url of the img)-unique string - that's why it's key and return
@@ -58,13 +59,15 @@ return (
         return <Image style={styles.image} source={{ uri:item}} />
     }}// {{}}- outer to show it's javascript, inner - the actual obj
     />
-    </View>
+    </ScrollView>
+    </>
 );
 
 };
 
 const styles = StyleSheet.create({
     image: {
+//image must have style with heihjt and width - otherwise it folds
         height: 200,
         width: 300
     }
