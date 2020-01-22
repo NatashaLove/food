@@ -35,8 +35,12 @@ const ResultsList = ({title, results, navigation})=> {
 //So going to pass to it Arrow function- anytime a user taps on anything enclosed by this touchable opacity 
 //we're gonna call navigation.navigate (function of navigation obj) -and pass in a string telling react or the stack navigator what screen to navigate to.
 
-                    <TouchableOpacity onPress={()=> navigation.navigate('ResultsShow')} // ResultsShow - name of screen in the app.js
-                    >
+                    <TouchableOpacity 
+                    onPress={()=> navigation.navigate('ResultsShow', {id: item.id})} // ResultsShow - name of screen in the app.js
+//navigate func -second argument is an object that's going to be information to communicate over to that other screen.
+//In this case-it's the business's I.D. - we're going to get the I.D. out of our 'item' (actual results or the business object): item.id
+//it will have this extra little piece of information in results:
+                   >
                     <ResultsDetail result={item} />
                     </TouchableOpacity>
                 );
@@ -63,6 +67,6 @@ const styles = StyleSheet.create({
  });
 
 export default withNavigation (ResultsList);
-//we're no longer exporting results less directly. not just return: ResultsList - now it's wrapped
+//we're no longer exporting resultsList directly. not just return: ResultsList - now it's wrapped 'withNavigation'- added navigate func
 //Instead we are exporting a special version of resultsList with extra functionality 
 //That'll give resultsList access to navigation.
